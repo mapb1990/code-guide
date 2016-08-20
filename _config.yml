@@ -1,6 +1,6 @@
-name:          Code Guide by @mdo
+name:          Code Guide by Miguel Borges
 description:   Standards for developing flexible, durable, and sustainable HTML and CSS.
-url:           http://codeguide.co
+url:           http://www.miguelborges.com
 
 markdown:      rdiscount
 permalink:     pretty
