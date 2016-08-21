@@ -4,4 +4,4 @@ url:           http://www.miguelborges.com
 
 markdown:      rdiscount
 permalink:     pretty
-pygments:      true
+highlighter: rouge

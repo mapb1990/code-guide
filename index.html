@@ -8,6 +8,19 @@ layout: default
 </div>
 <div class="section toc">
   <div class="col">
+    <h4><a href="#php">PHP</a></h4>
+    <ul>
+      <li><a href="#php-psr-2">PSR-2</a></li>
+      <li><a href="#php-general">General</a></li>
+      <li><a href="#php-structs">Structs</a></li>
+      <li><a href="#php-operators">Operators</a></li>
+      <li><a href="#php-views">Views</a></li>
+      <li><a href="#php-blade-views">Blade views</a></li>
+      <li><a href="#php-efficiently">Code Efficiently</a></li>
+      <li><a href="#php-phpdoc">PHPDoc</a></li>
+    </ul>
+  </div>
+  <div class="col">
     <h4><a href="#html">HTML</a></h4>
     <ul>
       <li><a href="#html-syntax">Syntax</a></li>
@@ -46,8 +59,8 @@ layout: default
 
 <div class="section" id="golden-rule">
   <div class="col">
-    <h2>Golden rule</h2>
-    <p>Enforce these, or your own, agreed upon guidelines at all times. Small or large, call out what's incorrect. For additions or contributions to this Code Guide, please <a href="https://github.com/mdo/code-guide/issues/new">open an issue on GitHub</a>.</p>
+    <h2>Proposals</h2>
+    <p>The intent of this guide is to reduce cognitive friction when scanning code from different authors. It does so by enumerating a shared set of rules and expectations about how to format PHP, HTML, Javascript and CSS code.</p>
   </div>
   <div class="col">
     <blockquote>
@@ -57,6 +70,146 @@ layout: default
 </div>
 
 
+<div class="heading" id="php">
+  <h2>PHP</h2>
+</div>
+
+<div class="section" id="php-psr-2">
+  <div class="col">
+    <h3>PSR-2</h3>
+    <p>Code MUST follow a <a href="http://www.php-fig.org/psr/psr-2/" target="_blank">PSR-2</a> Coding Style Guide.</p>
+
+    <h4>Overview</h4>
+    <ul>
+      <li>Code MUST follow a "coding style guide" PSR [<a href="https://github.com/php-fig/fig-standards/blob/master/acceptedPSR-1-basic-coding-standard.md">PSR-1</a>].</li>
+      <li>Code MUST use 4 spaces for indenting, not tabs.</li>
+      <li>There MUST NOT be a hard limit on line length; the soft limit MUST be 120 characters; lines SHOULD be 80 characters or less.</li>
+      <li>There MUST be one blank line after the <code>namespace</code> declaration, and there MUST be one blank line after the block of <code>use</code> declarations.</li>
+      <li>Opening braces for classes MUST go on the next line, and closing braces MUST go on the next line after the body.</li>
+      <li>Opening braces for methods MUST go on the next line, and closing braces MUST go on the next line after the body.</li>
+      <li>Visibility MUST be declared on all properties and methods; <code>abstract</code> and <code>final</code> MUST be declared before the visibility; <code>static</code> MUST be declared after the visibility.</li>
+      <li>Control structure keywords MUST have one space after them; method and function calls MUST NOT.</li>
+      <li>Opening braces for control structures MUST go on the same line, and closing braces MUST go on the next line after the body.</li>
+      <li>Opening parentheses for control structures MUST NOT have a space after them, and closing parentheses for control structures MUST NOT have a space before.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/psr2.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-general">
+  <div class="col">
+    <h3>General</h3>
+
+    <ul>
+      <li>Use single and double quotes when appropriate. If you’re not evaluating anything in the string, MUST use single quotes.</li>
+      <li>SHOULD use of <a href="http://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration" target="_blank">type-hinting</a> wherever possible</p></li>
+      <li>The ternary operator is only permitted to be used for short, simple to understand statements. If the statement can't be understood in one sentance, use an if statement instead. Whitespace must be used around the operators to make it clear where the operation is taking place.</li>
+      <li>Use a <code>TODO</code> keyword along with a ticket code (if exists) to mark this if you know an issue still exists in that code that should be dealt with later.</li>
+      <li>In a multi-line condition or operation the operators lines MUST start with operators.</li>
+      <li>SHOULD NOT create variables when is not necessary.</li>
+      <li>After a end of statement MUST use a semicolons <code>;</code> to mark the end of a statement. However, if the PHP closing tag is on the same line after a statement, the semicolon is optional but SHOULD not be used.</li>
+      <li>Never use the closing tag <code>?></code> at the end of a file, leave it out.</li>
+      <li>Is RECOMMENDED use strict comparisons whenever possible, to avoid problems with truthy and falsy values that might behave different than what you expect.</li>
+      <li>Is RECOMMENDED use Dependency of Injection to improve the low coupling/high cohesion and the unit tests.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/general.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-structs">
+  <div class="col">
+    <h3>Structs</h3>
+
+    <ul>
+      <li>NOT MUST be used the <a href="http://php.net/manual/en/control-structures.alternative-syntax.php" target="_blank">alternative sintax</a> of control structes.</li>
+      <li>If you have too many conditions in one control structure, is RECOMMENDED setting some variables before the start of the structure to improve readability.</li>
+      <li>MUST be used <code>elseif</code> instead of <code>else if</code>.</li>
+      <li>SHOULD NOT be used <code>else</code> statement unless it is absolutely necessary.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/structs.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-operators">
+  <div class="col">
+    <h3>Operators</h3>
+
+    <ul>
+      <li>MUST be use <code>&&/||</code> operators instead of <code>and/or</code>.</li>
+      <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code>, <code>.</code> operators MUST have one space before and after them.</li>
+      <li>MUST NOT use the shut-up operator <code>@</code> to suppress error messages. It makes debugging harder, is dirty style and slow as hell.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/operators.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-views">
+  <div class="col">
+    <h3>Views</h3>
+    <ul>
+      <li>Views MUST NOT contains any logic code.</li>
+      <li>MUST be used the <a href="http://php.net/manual/en/control-structures.alternative-syntax.php" target="_blank">alternative sintax</a> of control structes.</li>
+      <li>PHP tags SHOULD be on same line of statement.</li>
+      <li>MUST be used the ternary operator to decide to print html tags attributes.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/views.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-blade-views">
+  <div class="col">
+    <h3>Blade Views</h3>
+
+    <ul>
+      <li>MUST be follow the same rules of <a href="#php-views">PHP Views</a>.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight blade %}{% include php/blade.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-efficiently">
+  <div class="col">
+    <h3>Code Efficiently</h3>
+
+    <p>PHP is used as an interpreted language, rather than a compiled one. Each time a page loads, the source file(s) has/have to be read from disk, parsed, reduced to bytecodes, and interpreted by the Zend engine.  Modern operating systems cache disk accesses, and using a bytecode cache with enough memory allocated to its buffers can nearly eliminate the necessity of parsing source files once active development is finished.  Between the disk and bytecode caches, PHP code can be just as fast as, or even faster than, compiled languages which run on a virtual machine, such as Java.  There are no optimizations, however, which can make up for sloppy, inefficient programming:  It's up to you, the developer, to be wary of practices that lead to slower page loads and higher processing requirements.</p>
+
+    <ul>
+      <li>You should always use <code>echo</code> rather than <code>print</code> because it is more flexible and doesn't have the overhead of returning a value. (<code>print</code> <i>always</i> returns <code>1</code>, so its return value isn't terribly useful in the first place).</li>
+      <li>Don't call <code>echo</code> repeatedly, use string concatenation instead to eliminate the overhead of multiple function calls:  Neither <code>echo</code> nor <code>print</code> automatically emit a newline at the end of the string(s) they are passed, so there is absolutely no advantage to having multiple calls in a row.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/code_efficiently.php %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="php-phpdoc">
+  <div class="col">
+    <h3>PHPDoc</h3>
+
+    <ul>
+      <li>Classes, attributes and methods MUST have a docblock.</li>
+      <li><code>@author</code> tag MUST be present in all docblocks of methods or in the docblock of class (if class has written by same(s) author(s)).</li>
+      <li><code>@param</code> and <code>@return</code> tags MUST be present in all docblocks of methods.</li>
+      <li>The <code>@access</code> tag MUST NOT be used as it makes no sense.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight php %}{% include php/phpdoc.php %}{% endhighlight %}
+  </div>
+</div>
 
 <div class="heading" id="html">
   <h2>HTML</h2>
@@ -66,15 +219,32 @@ layout: default
   <div class="col">
     <h3>Syntax</h3>
     <ul>
-      <li>Use soft tabs with two spaces—they're the only way to guarantee code renders the same in any environment.</li>
-      <li>Nested elements should be indented once (two spaces).</li>
+      <li>Use soft tabs with four spaces—they're the only way to guarantee code renders the same in any environment.</li>
+      <li>Nested elements should be indented once (four spaces).</li>
+      <li>Always quote attribute values.</li>
       <li>Always use double quotes, never single quotes, on attributes.</li>
-      <li>Don't include a trailing slash in self-closing elements—the <a href="http://dev.w3.org/html5/spec-author-view/syntax.html#syntax-start-tag">HTML5 spec</a> says they're optional.</li>
-      <li>Don’t omit optional closing tags (e.g. <code>&lt;/li&gt;</code> or <code>&lt;/body&gt;</code>).</li>
+      <li>Close all HTML elements.</li>
+      <li>Always include a trailing slash in self-closing elements.</li>
+      <li>Don’t omit optional tags (e.g. <code>&lt;/li&gt;</code>, <code>&lt;/body&gt;</code>, ...).</li>
+      <li>Use lower case element names.</li>
+      <li>Don't use spaces bofore and after equal sign.</li>
     </ul>
   </div>
   <div class="col">
     {% highlight html %}{% include html/syntax.html %}{% endhighlight %}
+  </div>
+</div>
+
+<div class="section" id="html-image">
+  <div class="col">
+    <h3>Image Attributes</h3>
+    <ul>
+      <li>Always use the alt attribute with images. It is important when the image cannot be viewed and for acessibility software.</li>
+      <li>Always define image size. It reduces flickering because the browser can reserve space for images before they are loaded.</li>
+    </ul>
+  </div>
+  <div class="col">
+    {% highlight html %}{% include html/image.html %}{% endhighlight %}
   </div>
 </div>
 
@@ -158,6 +328,7 @@ layout: default
       <li><code>src</code>, <code>for</code>, <code>type</code>, <code>href</code>, <code>value</code></li>
       <li><code>title</code>, <code>alt</code></li>
       <li><code>role</code>, <code>aria-*</code></li>
+      <li>Boolean attributes (e.g. <code>selected</code> or <code>checked</code>)</li>
     </ul>
     <p>Classes make for great reusable components, so they come first. Ids are more specific and should be used sparingly (e.g., for in-page bookmarks), so they come second.</p>
   </div>
@@ -212,20 +383,19 @@ layout: default
   <div class="col">
     <h3>Syntax</h3>
     <ul>
-      <li>Use soft tabs with two spaces—they're the only way to guarantee code renders the same in any environment.</li>
-      <li>When grouping selectors, keep individual selectors to a single line.</li>
+      <li>Use soft tabs with four spaces—they're the only way to guarantee code renders the same in any environment.</li>
       <li>Include one space before the opening brace of declaration blocks for legibility.</li>
       <li>Place closing braces of declaration blocks on a new line.</li>
       <li>Include one space after <code>:</code> for each declaration.</li>
       <li>Each declaration should appear on its own line for more accurate error reporting.</li>
       <li>End all declarations with a semi-colon. The last declaration's is optional, but your code is more error prone without it.</li>
       <li>Comma-separated property values should include a space after each comma (e.g., <code>box-shadow</code>).</li>
-      <li>Don't include spaces after commas <em>within</em> <code>rgb()</code>, <code>rgba()</code>, <code>hsl()</code>, <code>hsla()</code>, or <code>rect()</code> values. This helps differentiate multiple color values (comma, no space) from multiple property values (comma with space).</li>
       <li>Don't prefix property values or color parameters with a leading zero (e.g., <code>.5</code> instead of <code>0.5</code> and <code>-.5px</code> instead of <code>-0.5px</code>).</li>
       <li>Lowercase all hex values, e.g., <code>#fff</code>. Lowercase letters are much easier to discern when scanning a document as they tend to have more unique shapes.</li>
       <li>Use shorthand hex values where available, e.g., <code>#fff</code> instead of <code>#ffffff</code>.</li>
       <li>Quote attribute values in selectors, e.g., <code>input[type="text"]</code>. <a href="http://mathiasbynens.be/notes/unquoted-attribute-values#css">They’re only optional in some cases</a>, and it’s a good practice for consistency.</li>
       <li>Avoid specifying units for zero values, e.g., <code>margin: 0;</code> instead of <code>margin: 0px;</code>.</li>
+      <li>Use double quotes in <code>@import</code> and <code>url()</code> values.</li>
     </ul>
     <p>Questions on the terms used here? See the <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets#Syntax">syntax section of the Cascading Style Sheets article</a> on Wikipedia.</p>
   </div>
@@ -414,11 +584,11 @@ layout: default
     <h3>Editor preferences</h3>
     <p>Set your editor to the following settings to avoid common code inconsistencies and dirty diffs:</p>
     <ul>
-      <li>Use soft-tabs set to two spaces.</li>
+      <li>Use soft-tabs set to four spaces.</li>
       <li>Trim trailing white space on save.</li>
       <li>Set encoding to UTF-8.</li>
       <li>Add new line at end of files.</li>
     </ul>
-    <p>Consider documenting and applying these preferences to your project's <code>.editorconfig</code> file. For an example, see <a href="https://github.com/twbs/bootstrap/blob/master/.editorconfig">the one in Bootstrap</a>. Learn more <a href="http://editorconfig.org">about EditorConfig</a>.</p>
+    <p>Consider documenting and applying these preferences to your project's <code>.editorconfig</code> file. Learn more <a href="http://editorconfig.org">about EditorConfig</a>.</p>
   </div>
 </div>
